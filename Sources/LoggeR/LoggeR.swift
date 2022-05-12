@@ -1,6 +1,10 @@
-public struct LoggeR {
-    public private(set) var text = "Hello, World!"
+import Foundation
 
-    public init() {
-    }
+public class LoggeR {
+  private init() {}
+  public let shared = LoggeR()
+  
+  public func log(_ message: String) {
+    debugPrint(message)
+  }
 }
