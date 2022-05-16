@@ -13,7 +13,7 @@ public enum LogLevel: Int {
   case warning
   case error
   
-  var title: String {
+  public var title: String {
     switch self {
     case .debug:
       return "DEBUG  "
@@ -25,7 +25,7 @@ public enum LogLevel: Int {
       return "ERROR  "
     }
   }
-  var icon: String {
+  public var icon: String {
     switch self {
     case .debug:
       return "🟤"
@@ -37,7 +37,7 @@ public enum LogLevel: Int {
       return "🔴"
     }
   }
-  var titleWithIcon: String {
+  public var titleWithIcon: String {
     return icon.appending(" ").appending(title)
   }
 }
