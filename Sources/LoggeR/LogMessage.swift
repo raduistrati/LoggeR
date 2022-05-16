@@ -8,10 +8,10 @@
 import Foundation
 
 public struct LogMessage {
-  let logLevel: LogLevel
-  let date: Date = Date()
-  let message: String
-  let description: String
-  let trace: String
-  let userData: [String : Any]
+  public let logLevel: LogLevel
+  public let date: Date = Date()
+  public let message: String
+  public let description: String
+  public let trace: String
+  public let userData: [String : Any]
 }
