@@ -10,10 +10,11 @@ import RxSwift
 
 public extension ObservableConvertibleType {
   func logActivity(
+    level: LogLevel,
+    _ message: String,
+    description: String = "",
     observableName: String,
-    message: String,
     includeElemnts: Bool = false,
-    logLevel: LogLevel = .info,
     loggAllEvents: Bool = true,
     file: String = #file,
     function: String = #function,
@@ -25,22 +26,57 @@ public extension ObservableConvertibleType {
       .do(
         onNext: { newElement in
           let elements = includeElemnts ? " \(newElement) | " : ""
-          logger.log(level: .info, observableName + " RxNext     ->| " + elements + message, file: file, function: function, line: line)
+          logger.log(
+            level: level,
+            observableName + " RxNext     ->| " + elements + message,
+            fullMessage: description,
+            file: file,
+            function: function,
+            line: line
+          )
         },
-        onError: {error in
-          logger.log(level: .error, observableName + error.localizedDescription, file: file, function: function, line: line)
+        onError: { error in
+          logger.log(
+            level: .error,
+            observableName + " RxError     " + error.localizedDescription,
+            fullMessage: description,
+            file: file,
+            function: function,
+            line: line
+          )
         },
         onCompleted: {
           guard loggAllEvents else { return }
-          logger.log(level: .debug, observableName + " RxCompleted ", file: file, function: function, line: line)
+          logger.log(
+            level: .debug,
+            observableName + " RxCompleted ",
+            fullMessage: description,
+            file: file,
+            function: function,
+            line: line
+          )
         },
         onSubscribe: {
           guard loggAllEvents else { return }
-          logger.log(level: .debug, observableName + " RxSubscribed", file: file, function: function, line: line)
+          logger.log(
+            level: .debug,
+            observableName + " RxSubscribed",
+            fullMessage: description,
+            file: file,
+            function: function,
+            line: line
+          )
         },
         onDispose: {
           guard loggAllEvents else { return }
-          logger.log(level: .debug, observableName + " RxDisposed  ", file: file, function: function, line: line)
+          logger.log(
+            level: .debug,
+            observableName + " RxDisposed  ",
+            fullMessage: description,
+            file: file,
+            function: function,
+            line: line
+          )
         }
       )
   }

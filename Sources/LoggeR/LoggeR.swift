@@ -19,8 +19,22 @@ public class LoggeR {
   public var customLogger: LogHandlerType? = nil
   public var enableConsolePrint = true
   
-  public func log(level: LogLevel, _ message: String, fullMessage: String = "", file: String = #file, function: String = #function, line: Int = #line) {
-    let logMessage = makeLogMessage(level: level, message, fullMessage: fullMessage, file: file, function: function, line: line)
+  public func log(
+    level: LogLevel,
+    _ message: String,
+    fullMessage: String = "",
+    file: String = #file,
+    function: String = #function,
+    line: Int = #line
+  ) {
+    let logMessage = makeLogMessage(
+      level: level,
+      message,
+      fullMessage: fullMessage,
+      file: file,
+      function: function,
+      line: line
+    )
     if enableConsolePrint {
       defaultLogger.handleLog(logMessage)
     }
